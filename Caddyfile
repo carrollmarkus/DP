@@ -1,0 +1,14 @@
+:
+tls internal
+route {
+    forward_proxy {
+        basic_auth user pass 
+        hide_ip
+        hide_via
+        probe_resistance
+    }
+    reverse_proxy  https://nextcloud.com  { 
+        header_up  Host  {upstream_hostport}
+        header_up  X-Forwarded-Host  {host}
+    }
+}
